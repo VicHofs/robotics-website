@@ -52,7 +52,7 @@ export const Container = styled.button<ContainerProps>`
 
   &:hover,
   &:focus {
-    ${({ $variant, theme }) =>
+    ${({ $variant }) =>
       $variant === "outline"
         ? `background-color: #ffffff50;` // TODO: rethink outline, current approach just blanks it out on hover
         : `filter: brightness(0.9);`}

@@ -4,10 +4,10 @@ import { Container, Content, ImageContainer } from "./styles";
 interface LeadershipCardProps extends ComponentProps<typeof Container> {
   name: string;
   picture: string;
-  majors: string[];
-  roles: string | string[];
+  majors: string | string[] | readonly string[];
+  roles: string | string[] | readonly string[];
   year: "Freshman" | "Sophomore" | "Junior" | "Senior";
-  bio?: string | string[];
+  bio?: string | string[] | readonly string[];
 }
 
 const LeadershipCard: React.FC<LeadershipCardProps> = ({

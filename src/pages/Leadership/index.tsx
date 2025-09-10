@@ -13,9 +13,13 @@ const Leadership = () => {
     (typeof board)[number] | null
   >(null);
 
+  // add a minimal type for experimental API to avoid TS errors
+  const docAny: Document & { startViewTransition?: (cb: () => void) => void } =
+    document as any;
+
   const handleCardClick = (leader: any) => {
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
+    if (docAny.startViewTransition) {
+      docAny.startViewTransition(() => {
         setSelectedLeader(leader);
       });
     } else {

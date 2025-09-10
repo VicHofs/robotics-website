@@ -12,7 +12,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   iconLucide,
   title,
   description,
-  ...props
 }) => {
   return (
     <Container>

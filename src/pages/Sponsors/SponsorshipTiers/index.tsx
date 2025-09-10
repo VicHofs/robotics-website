@@ -52,7 +52,15 @@ const dividerVariants = {
   },
 };
 
-const sponsors = {
+type Logo = string | { dark: string; light: string };
+type Sponsor = { name: string; logo: Logo; link: string; description?: string };
+
+const sponsors: {
+  maroon: Sponsor[];
+  gold: Sponsor[];
+  silver: Sponsor[];
+  bronze: Sponsor[];
+} = {
   maroon: [
     {
       name: "Minnesota Space Grant Consortium",
@@ -140,8 +148,8 @@ export default function SponsorshipTiers() {
                         <LogoWrapper>
                           <img
                             src={
-                              sponsor.logo.dark
-                                ? sponsor.logo[theme.name]
+                              typeof sponsor.logo === "object"
+                                ? sponsor.logo[(theme.name as "dark" | "light")]
                                 : sponsor.logo
                             }
                             alt={sponsor.name}
@@ -200,7 +208,7 @@ export default function SponsorshipTiers() {
             viewport={{ once: true, margin: "-100px" }}
           >
             {sponsors.gold.map((sponsor) => (
-              <motion.div variants={childVariants}>
+              <motion.div key={sponsor.name} variants={childVariants}>
                 <Card key={sponsor.name}>
                   <CardHeader bgColor="#FFCC33" textColor="#171717">
                     <Heading4 align="center" weight="bold">
@@ -225,8 +233,8 @@ export default function SponsorshipTiers() {
                       >
                         <img
                           src={
-                            sponsor.logo.dark
-                              ? sponsor.logo[theme.name]
+                            typeof sponsor.logo === "object"
+                              ? sponsor.logo[(theme.name as "dark" | "light")]
                               : sponsor.logo
                           }
                           alt={sponsor.name}
@@ -237,9 +245,11 @@ export default function SponsorshipTiers() {
                           }}
                         />
                       </div>
-                      <Paragraph align="center">
-                        {sponsor.description}
-                      </Paragraph>
+                      {sponsor.description && (
+                        <Paragraph align="center">
+                          {sponsor.description}
+                        </Paragraph>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -273,7 +283,7 @@ export default function SponsorshipTiers() {
             viewport={{ once: true, margin: "-100px" }}
           >
             {sponsors.silver.map((sponsor) => (
-              <motion.div variants={childVariants}>
+              <motion.div key={sponsor.name} variants={childVariants}>
                 <Card key={sponsor.name}>
                   <CardHeader bgColor="#d1d5db" textColor="#171717">
                     <Heading4 align="center" weight="bold">
@@ -298,8 +308,8 @@ export default function SponsorshipTiers() {
                       >
                         <img
                           src={
-                            sponsor.logo.dark
-                              ? sponsor.logo[theme.name]
+                            typeof sponsor.logo === "object"
+                              ? sponsor.logo[(theme.name as "dark" | "light")]
                               : sponsor.logo
                           }
                           alt={sponsor.name}
@@ -310,7 +320,9 @@ export default function SponsorshipTiers() {
                           }}
                         />
                       </div>
-                      <Text align="center">{sponsor.description}</Text>
+                      {sponsor.description && (
+                        <Text align="center">{sponsor.description}</Text>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -344,7 +356,7 @@ export default function SponsorshipTiers() {
             viewport={{ once: true, margin: "-100px" }}
           >
             {sponsors.bronze.map((sponsor) => (
-              <motion.div variants={childVariants}>
+              <motion.div key={sponsor.name} variants={childVariants}>
                 <Card key={sponsor.name}>
                   <CardHeader bgColor="#B35C00" textColor="#ffffff">
                     <Text align="center" weight="bold">
@@ -368,8 +380,8 @@ export default function SponsorshipTiers() {
                       >
                         <img
                           src={
-                            sponsor.logo.dark
-                              ? sponsor.logo[theme.name]
+                            typeof sponsor.logo === "object"
+                              ? sponsor.logo[(theme.name as "dark" | "light")]
                               : sponsor.logo
                           }
                           alt={sponsor.name}

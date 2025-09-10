@@ -1,12 +1,51 @@
 import { ComponentProps } from "react";
-import { Container } from "./styles";
+import { AnchorContainer, Container } from "./styles";
 import { ChevronRight } from "lucide-react";
 
-interface ArrowLinkProps extends ComponentProps<typeof Container> {}
+type BaseContainerProps = Omit<ComponentProps<typeof Container>, "to"> & {
+  to?: string;
+  href?: string;
+};
+interface ArrowLinkProps extends BaseContainerProps {}
 
-const ArrowLink: React.FC<ArrowLinkProps> = ({ children, ...props }) => {
+const ArrowLink: React.FC<ArrowLinkProps> = ({ children, href, to, ...rest }) => {
+  if (href) {
+    return (
+      <AnchorContainer href={href} {...rest}>
+        {children}{" "}
+        <ChevronRight
+          size={15}
+          style={{
+            position: "absolute",
+            left: "100%",
+            top: "55%",
+            transform: "translateY(-50%)",
+          }}
+        />
+      </AnchorContainer>
+    );
+  }
+
+  if (to) {
+    return (
+      <Container to={to} {...rest}>
+        {children}{" "}
+        <ChevronRight
+          size={15}
+          style={{
+            position: "absolute",
+            left: "100%",
+            top: "55%",
+            transform: "translateY(-50%)",
+          }}
+        />
+      </Container>
+    );
+  }
+
+  // Fallback to anchor if neither provided
   return (
-    <Container {...props}>
+    <AnchorContainer href="#" {...rest}>
       {children}{" "}
       <ChevronRight
         size={15}
@@ -17,7 +56,7 @@ const ArrowLink: React.FC<ArrowLinkProps> = ({ children, ...props }) => {
           transform: "translateY(-50%)",
         }}
       />
-    </Container>
+    </AnchorContainer>
   );
 };
 

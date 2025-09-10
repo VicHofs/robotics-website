@@ -9,12 +9,7 @@ interface NavLinkProps extends Omit<ComponentProps<typeof StyledLink>, "to"> {
   sublinks?: NavLinkProps[];
 }
 
-const NavLink: React.FC<NavLinkProps> = ({
-  label,
-  route,
-  sublinks,
-  children,
-}) => {
+const NavLink: React.FC<NavLinkProps> = ({ label, route, sublinks }) => {
   const [popoverVisible, setPopoverVisible] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const handleMouseEnter = () => {

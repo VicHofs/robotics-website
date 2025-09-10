@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Container = styled(Link)`
+const base = css`
   --padding: 4px;
 
   position: relative;
@@ -28,4 +28,12 @@ export const Container = styled(Link)`
       transform: translate(0, calc(-1 * var(--padding))) scaleX(1.1) scaleY(0.7);
     }
   }
+`;
+
+export const Container = styled(Link)`
+  ${base}
+`;
+
+export const AnchorContainer = styled.a`
+  ${base}
 `;
